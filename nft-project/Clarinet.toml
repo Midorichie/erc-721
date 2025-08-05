@@ -6,3 +6,4 @@ telemetry = true
 
 [contracts.nft]
 path = "contracts/nft.clar"
+

@@ -1,73 +1,73 @@
-# Hammed NFT — ERC-721 Style NFT Contract on Stacks Blockchain
+# Hammed NFT — ERC-721 NFT Smart Contract on Stacks
 
-This project implements a simplified ERC-721-like NFT smart contract using Clarity for the Stacks blockchain. It enables minting, transferring, and querying ownership of unique digital assets.
+A non-fungible token (NFT) contract built with Clarity for the Stacks blockchain. This implements minting, transferring, burning, and querying unique tokens.
+
+---
+
+## 🚀 Phase 2 Updates
+
+- 🔧 Added burn functionality
+- 🧮 Track token count per owner using a new map
+- 🧪 Add test for token count after minting and burning
+- 🛡 Introduced `minter` role for mint authorization
+- 🧩 Added event logs for mint/transfer/burn
+- 🧠 Added `nft-utils` contract for ownership checks
+- ✅ Added Clarinet-based test suite
 
 ---
 
 ## 📁 Project Structure
 
-- `contracts/nft.clar` — The main smart contract.
-- `Clarinet.toml` — Project configuration for Clarinet.
-- `README.md` — Project guide and documentation.
-- `tests/` — (You can add TypeScript tests here using Clarinet + Jest setup.)
+- `contracts/nft.clar` — Main contract
+- `contracts/nft-utils.clar` — Helper utilities
+- `tests/nft_test.ts` — Clarinet test suite
+- `Clarinet.toml` — Clarinet config
 
 ---
 
-## ⚙️ Features
+## 🧪 Run Tests
 
-- Only contract owner can mint NFTs
-- Each token ID is unique (non-fungible)
-- Token transfer restricted to current owner
-- Track total supply and ownership
-
----
-
-## 🛠 How to Run
-
-1. **Install Clarinet** (if not already installed)  
-   ```bash
-   curl -sSL https://get.hiro.so/clarinet/install | bash
-Initialize project
-
-bash
-Copy
-Edit
-clarinet new nft-project
-cd nft-project
-Replace default files with:
-
-contracts/nft.clar (from this repo)
-
-Clarinet.toml
-
-README.md
-
-Run Checks
-
-bash
-Copy
-Edit
-clarinet check
-Start Console
-
-bash
-Copy
-Edit
-clarinet console
-📤 Functions
-Function	Description
-mint(token-id, recipient)	Mints a unique NFT to the specified recipient. Only the contract deployer can mint.
-transfer(token-id, recipient)	Transfers ownership to another address. Only the token owner can transfer.
-get-owner(token-id)	Returns the owner of a specific token.
-get-total-supply()	Returns total number of minted NFTs.
+```bash
+clarinet test
+🧠 Contract Functions
+Function	Type	Description
+mint	Public	Mint NFT to recipient (minter only)
+| `get-token-count(user)` | Read-only | Returns the number of tokens owned by a principal |
+transfer	Public	Send token to another address
+burn	Public	Destroy an NFT (only by token owner)
+get-owner	Read-only	Check the owner of a specific token
+get-total-supply	Read-only	Get total number of minted NFTs
+set-minter	Public	Assign a new authorized minter
 
 🔐 Error Codes
-u100 — Unauthorized (only contract owner can mint)
+u100 — Unauthorized minter
 
-u101 — Token already minted
+u101 — Token already exists
 
-u102 — Unauthorized transfer (not token owner)
+u102 — Unauthorized transfer
 
-u103 — Token does not exist
+u103 — Token doesn't exist
 
 u104 — Owner not found
+
+u105 — Only owner can burn
+
+u106 — Token not found
+
+u110 — Only current minter can assign a new minter
+
+📄 License
+MIT
+
+yaml
+Copy
+Edit
+
+---
+
+## ✅ Next Steps (Optional Enhancements)
+
+- Add on-chain metadata (name, description, image URL)
+- Approval mechanisms (for marketplaces)
+- Batch minting
+- Frontend integration with Stacks.js
