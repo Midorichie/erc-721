@@ -1,0 +1,8 @@
+[project]
+name = "nft-project"
+description = "ERC-721 style NFT smart contract on Stacks using Clarity."
+authors = ["Hammed Yakub"]
+telemetry = true
+
+[contracts.nft]
+path = "contracts/nft.clar"
